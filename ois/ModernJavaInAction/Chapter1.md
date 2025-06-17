@@ -122,11 +122,10 @@
 
 <aside>
     
-    🍬 프레디케이트(predicate)란 무엇인가?
+    🍬> 프레디케이트(predicate)란 무엇인가?
     - filterApples는 Predicate<Apple>를 파라미터로 받음
     - 수학에서 인수로 값을 받아 true, false를 반환하는 함수
-    
-</aside>            
+</aside>     
 
 ### 1.3.3 메서드 전달에서 람다로
 
