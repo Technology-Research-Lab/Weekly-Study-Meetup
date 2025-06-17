@@ -94,25 +94,25 @@
         
         ```java
         public static boolean isGreenApple(Apple apple) { 
-                return GREEN.equals(apple.getColor());
+            return GREEN.equals(apple.getColor());
         }
         
         public static boolean isHeavyApple(Apple apple) { 
-                return apple.getWeight() > 150;
+            return apple.getWeight() > 150;
         }
         
         public interface Predicate<T> { 
-                boolean test(T t);
+            boolean test(T t);
         }
         
         static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p) { 
-                List<Apple> result = new ArrayList<>();
-                for (Apple apple: inventory) { 
-                        if (p.test(apple)) { 
-                                result.add(apple);
-                        } 
+            List<Apple> result = new ArrayList<>();
+            for (Apple apple: inventory) { 
+                if (p.test(apple)) { 
+                        result.add(apple);
                 } 
-                return result;
+            } 
+            return result;
         }
         
         // 메서드 호출
@@ -121,9 +121,10 @@
         ```
 
 <aside>
-🍬 프레디케이트(predicate)란 무엇인가?
-- filterApples는 Predicate<Apple>를 파라미터로 받음
-- 수학에서 인수로 값을 받아 true, false를 반환하는 함수
+🍬 
+    프레디케이트(predicate)란 무엇인가?
+    - filterApples는 Predicate<Apple>를 파라미터로 받음
+    - 수학에서 인수로 값을 받아 true, false를 반환하는 함수
 </aside>            
 
 ### 1.3.3 메서드 전달에서 람다로
