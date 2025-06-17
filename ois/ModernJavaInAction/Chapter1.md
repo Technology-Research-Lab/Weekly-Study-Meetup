@@ -67,13 +67,13 @@
         
         ```java
         public static List<Apple> filterGreenApples(List<Apple> inventory) {
-        		List<Apple> result = new ArrayList<>();
-        		for (Apple apple : inventory) {
-        				if (GREEN.equals(apple.getColor())) {
-        						result.add(apple);
-        				}
-        				return result;
-        		}
+            List<Apple> result = new ArrayList<>();
+            for (Apple apple : inventory) {
+                if (GREEN.equals(apple.getColor())) {
+                        result.add(apple);
+                }
+                return result;
+            }
         }
         ```
         
@@ -81,13 +81,13 @@
             
             ```java
             public static List<Apple> filterHeavyApples(List<Apple> inventory) {
-            		List<Apple> result = new ArrayList<>();
-            		for (Apple apple : inventory) {
-            				if (apple.getWeight() > 150) {
-            						result.add(apple);
-            				}
-            		}
-            		return result;
+                List<Apple> result = new ArrayList<>();
+                for (Apple apple : inventory) {
+                    if (apple.getWeight() > 150) {
+                            result.add(apple);
+                    }
+                }
+                return result;
             }
             ```
             
