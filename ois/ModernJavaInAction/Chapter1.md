@@ -174,12 +174,12 @@
         ```
 
 ### 1.4.1 멀티스레딩은 어렵다
-![image.png](attachment:babf31fe-20d8-43e3-b898-6868c1efe17a:image.png)
+![image1-5.png](./images/image1-5.png)
 - 스트림 → 라이브러리에서 반복되는 패턴 제공
     - 필터, 추출, 그룹화 등
     - 쉽게 병렬화 가능
 - 두 cpu를 가진 환경에서 리스트 필터링
-    ![image.png](attachment:291bc084-919b-4886-a016-2a80f28b55b7:image.png)
+    ![image1-6.png](./images/image1-6.png)
 - 컬렉션 → 어떻게 데이터를 저장하고 접근할지에 중점
 - 스트림 → 데이터에 어떤 계산을 할 것인지 묘사하는 것에 중점
     - 스트림은 스트림 내의 요소를 쉽게 병렬로 처리할 수 있는 환경을 제공한다는 것이 핵심
