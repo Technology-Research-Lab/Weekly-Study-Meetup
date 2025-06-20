@@ -129,9 +129,7 @@
 </aside>    
 
 ### 1.3.3 메서드 전달에서 람다로
-
-- 람다
-    
+- 익명 함수 람다
     ```java
     // 예시 1
     filterApples(inventory, (Apple a) -> GREEN.equals(a.getColor()));
@@ -142,9 +140,70 @@
     // 예시 3
     filterApples(inventory, (Apple a) -> a.getWeight() < 80 || RED.equals(a.getColor()));
     ```
-    
     - 한 번만 사용할 메서드 일 경우
-        
         → 따로 정의할 필요 없이 람다로 간결하게 표현 가능
-        
         - 람다가 몇 줄 씩 길어지면 따로 이름을 부여한 메서드로 구현하는 게 명확함
+  ## 1.4 스트림
+
+- 리스트에서 고가의 트랜잭션 Transaction (거래)만 필터링한 다음에 통화로 결과를 그룹화
+    - Collection
+        
+        ```java
+        Map<Currency, List<Transaction>> transactionsByCurrencies = new HashMap<>(); 
+        for (Transaction transaction : transactions) { 
+        		if (transaction.getPrice() > 1000) { 
+        				Currency currency = transaction.getCurrency();
+        				List<Transaction> transactionsForCurrency = transactionsByCurrencies.get(currency);
+        				if (transactionsForCurrency == null) { 
+        						transactionsForCurrency = new ArrayList<>();
+        						transactionsByCurrencies.put(currency, transactionsForCurrency);
+        				} 
+        				transactionsForCurrency.add(transaction);
+        		} 
+        }
+        ```
+        
+    - Stream
+        
+        ```java
+        import static java.util.stream.Collectors.groupingBy;
+        Map<Currency, List<Transaction>> transactionsByCurrencies = 
+        		transactions.stream()
+        					.filter((Transaction t) -> t.getPrice() > 1000)
+        					.collect(groupingBy(Transaction::getCurrency));
+        ```
+
+### 1.4.1 멀티스레딩은 어렵다
+![image.png](attachment:babf31fe-20d8-43e3-b898-6868c1efe17a:image.png)
+- 스트림 → 라이브러리에서 반복되는 패턴 제공
+    - 필터, 추출, 그룹화 등
+    - 쉽게 병렬화 가능
+- 두 cpu를 가진 환경에서 리스트 필터링
+    ![image.png](attachment:291bc084-919b-4886-a016-2a80f28b55b7:image.png)
+- 컬렉션 → 어떻게 데이터를 저장하고 접근할지에 중점
+- 스트림 → 데이터에 어떤 계산을 할 것인지 묘사하는 것에 중점
+    - 스트림은 스트림 내의 요소를 쉽게 병렬로 처리할 수 있는 환경을 제공한다는 것이 핵심
+- 스트림, 람다 → 병렬성 보장
+    ```java
+    import static java.util.stream.Collectors.toList;
+    List<Apple> heavyApples = inventory.parallelStream().filter((Apple a) -> a.getWeight() > 150).collect(toList());
+    ```
+### 자바의 병렬성과 공유되지 않은 가변 상태
+> 함수형 프로그래밍에서 함수형이란 ‘함수를 일급값 으로 사용한다’라는 의미도 있지만 부가적으로 ‘프로그램이 실행되는 동안 컴포넌트 간에 상호 작용이 일어나지 않는다’라는 의미도 포함한다.
+> 
+## 1.5 디폴트 메서드와 자바 모듈
+```java
+// 디폴트 메서드 도입 전
+Collections.sort(students, comparator);
+
+// 디폴트 메서드 도입 후
+myList.sort(comparator)
+
+// List 인터페이스에 추가된 디폴트 메서드
+default void sort(Comparator<? super E> c) {
+    Collections.sort(this, c);
+}
+```
+- sort()는 원래 Collections 클래스의 정적(static) 메서드로만 존재
+- 디폴트 메서드로 Lilst 인터페이스 안에 구현 함으로써 Collections.sort()를 호출 → myList.sort() 사용 가능
+    - List 인터페이스에 디폴트 메서드를 구현하지 않으면 List의 모든 구현체에 sort() 구현해야 사용 가능
