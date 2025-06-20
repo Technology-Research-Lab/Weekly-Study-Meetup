@@ -60,7 +60,7 @@
 
 ### 1.3.2 코드 넘겨주기 : 예제
 
-- 클래스 Apple, 메서드 getColor(), 변수 inventory<List>
+- 클래스 Apple, 메서드 getColor(), getWeight(), 변수 inventory<List>
 - 모든 녹색 사과를 선택해서 리스트를 반환하는 프로그램 구현
     - 특정 항목을 선택해서 반환하는 동작, filter 사용하여 filterGreenApples() 구현
     - 자바 8 이전
