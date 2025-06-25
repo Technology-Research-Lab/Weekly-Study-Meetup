@@ -11,11 +11,11 @@
         
         ```java
         public void printEvenNumbers(List<Integer> numbers) {
-        		for (int n : numbers) {
-        				if (n % 2 == 0) {
-        						System.out.println(n);
-        				}
-        		}
+            for (int n : numbers) {
+                if (n % 2 == 0) {
+                    System.out.println(n);
+                }
+            }
         }
         ```
         
@@ -25,11 +25,11 @@
         
         ```java
         public void printNumbers(List<Integer> numbers, Predicate<Integer> condition) {
-        		for (int n : numbers) {
-        				if (condition.test(n)) {
-        						System.out.println(n);
-        				}
-        		}
+            for (int n : numbers) {
+                if (condition.test(n)) {
+                    System.out.println(n);
+                }
+            }
         }
         ```
         
@@ -56,7 +56,7 @@
         
         | Modifier and Type | Method | Description |
         | --- | --- | --- |
-        | boolean | [**test**](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html#test-T-)([**T**](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html) t) | Evaluates this predicate on the given argument. |
+        | boolean | test(T t) | Evaluates this predicate on the given argument. |
         - 동작(메서드, 함수, 2급 시민)을 인자로 직접 전달 불가
         - 함수형 인터페이스를 통해 동작을 객체로 포장 → 1급 시민으로 취급
 
@@ -78,14 +78,14 @@
     
     ```java
     public static List<Apple> filterGreenApples(List<Apple> inventory) {
-    		List<Apple> result = new ArrayList<>(); // 사과 리스트
-    		for (Apple apple : inventory) {
-    				**if (GREEN.equals(apple.getColor()) { // 녹색 사과만 선택**
-    						result.add(apple;)
-    				}
-    		}
-    		
-    		return result;
+        List<Apple> result = new ArrayList<>(); // 사과 리스트
+        for (Apple apple : inventory) {
+            **if (GREEN.equals(apple.getColor()) { // 녹색 사과만 선택**
+                result.add(apple;)
+            }
+        }
+        
+        return result;
     }
     ```
     
@@ -99,14 +99,14 @@
     
     ```java
     public static List<Apple> filterApplesByColor(List<Apple> inventory, Color color) {
-    		List<Apple> result = new ArrayList<>();
-    		for (Apple apple : inventory) {
-    				**if (apple.getColor().equals(color)) {**
-    						result.add(apple);
-    				}
-    		}
-    		
-    		return result;
+        List<Apple> result = new ArrayList<>();
+        for (Apple apple : inventory) {
+            **if (apple.getColor().equals(color)) {**
+                result.add(apple);
+            }
+        }
+        
+        return result;
     }
     
     // 메서드 호출
@@ -118,14 +118,14 @@
     
     ```java
     public static List<Apple> filterApplesByWeight(List<Apple> inventory, int weight) { 
-    		List<Apple> result = new ArrayList<>();
-    		for (Apple apple: inventory) { 
-    				**if ( apple.getWeight() > weight ) {** 
-    						result.add(apple);
-    				} 
-    		} 
-    		
-    		return result;
+        List<Apple> result = new ArrayList<>();
+        for (Apple apple: inventory) { 
+            **if (apple.getWeight() > weight) {** 
+                result.add(apple);
+            } 
+        } 
+        
+        return result;
     }
     ```
     
@@ -140,17 +140,16 @@
 - 모든 속성을 파라미터로 추가 → 실전에서 금지하는 이유
     
     ```java
-    public static List<Apple> filterApples(List<Apple> inventory, Color color, 
-    																			 int weight, boolean flag) { 
-    		List<Apple> result = new ArrayList<>();
-    		for (Apple apple: inventory) { 
-    				if **((flag && apple.getColor().equals(color)) || 
-    						(!flag && apple.getWeight() > weight))** {
-    						result.add(apple);
-    				} 
-    		} 
-    		
-    		return result;
+    public static List<Apple> filterApples(List<Apple> inventory, Color color, int weight, boolean flag) { 
+        List<Apple> result = new ArrayList<>();
+        for (Apple apple: inventory) { 
+            if **((flag && apple.getColor().equals(color)) || 
+                (!flag && apple.getWeight() > weight))** {
+                result.add(apple);
+            } 
+        } 
+        
+        return result;
     }
     
     // 메서드 호출
