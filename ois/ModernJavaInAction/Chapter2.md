@@ -156,3 +156,88 @@
     List<Apple> greenApples = filterApples(inventory, GREEN, 0, true);
     List<Apple> heavyApples = filterApples(inventory, null, 150, false);
     ```
+
+## 2.2 동작 파라미터화
+
+- 변화에 더 유연한 방법이 필요하다.
+- 사과의 속성에 기반한 boolean 값을 반환 해보자.
+    - 사과가 녹색인가? 사과가 150그램 이상인가?
+- Predicate
+    - 참 또는 거짓을 반환하는 함수
+    - 선택 조건을 결정하는 인터페이스 ApplePredicate 정의
+        
+        ```java
+        public interface ApplePredicate {
+            boolean test(Apple apple);
+        }
+        
+        // 무거운 사과만 선택
+        public class AppleHeavyWeightPredicate implments ApplePredicate {
+            public boolean test(Apple apple) {
+                return apple.getWeight() > 150;
+            }
+        }
+        
+        // 녹색 사과만 선택
+        public class AppleGreenColorPredicate implements ApplePredicate {
+            public boolean test(Apple apple) {
+                return GREEN.equals(apple.getColor());
+            }
+        }
+        ```
+        
+        ⇒ 전략 디자인 패턴
+        
+        - 각 알고리즘(전략)을 캡슐화하는 알고리즘 패밀리를 정의하고 런타임에 알고리즘을 선택
+        - 그럼 이제 filterApples가 ApplePredicate 객체를 받아서 사과의 조건을 검사하도록 메서드를 수정해야 한다?
+            - 동작 파라미터화 → filterApples 메서드가 ApplePredicate 객체를 인자로 받아야 한다.
+            - 메서드가 실행할 동작을 외부에서(파라미터로) 주입 받는다.
+            - 색, 무게 두 가지 전략(구현체)이 있는 ApplePredicate 인터페이스를 filterApples 메서드의 인자로 전달하여 상황에 따라 전략을 선택하게 만든다.
+
+<aside>
+🍬
+
+자바에서 인터페이스는 1급 객체가 아니다.
+
+- 1급 객체의 조건
+    1. 변수에 할당할 수 있다.
+    2. 함수의 인자로 전달할 수 있다.
+    3. 함수의 반환값으로 사용할 수 있다.
+- 자바에서 1급 객체는 “객체”이다.
+- new로 생성한 인스턴스(구현체)가 변수에 담을 수 있고, 인자로 전달 가능하다.
+- 인터페이스는 설계도일 뿐, 인스턴스가 아니다.
+</aside>
+
+### 2.2.1 네 번째 시도 : 추상적 조건으로 필터링
+
+```java
+public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
+    List<Apple> result = new ArrayList<>();
+    for (Apple apple : inventory) {
+        if (p.test(apple)) {
+            result.add(apple;)
+        }
+    }
+    
+    return result;
+}
+```
+
+### 코드/동작 전달하기
+
+- 이제 필요한 대로 다양한 ApplePredicate 구현체를 만들어 filterApples로 전달만 하면 된다.
+- 농부의 요구 사항 : 150그램 이상의 빨간 사과를 검색
+    
+    ```java
+    // ApplePredicate의 test()를 구현하는 구현체(전략)
+    public class AppleRedAndHeavyPredicate implments ApplePredicate {
+        public boolean test(Apple apple) {
+            return RED.equals(apple.getColor()) && apple.getWeight() > 150; 
+        }
+    }
+    
+    // 메서드 호출
+    List<Apple> redAndHeavyApples = filterApples(inventory, new AppleRedAndHeavyPredicate());
+    ```
+    
+- ApplePredicate의 구현 객체에 의해 filterApples 메서드의 동작 결정!
