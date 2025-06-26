@@ -236,6 +236,5 @@ public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) 
     ```
     
 - ApplePredicate의 구현 객체에 의해 filterApples 메서드의 동작 결정!
-  
-  <img src="./images/image2-2.png" alt="image" width="500">
-  <img src="./images/image2-3.png" alt="image" width="500">
+  <img src="./images/image2-2.png" alt="image" width="700">
+  <img src="./images/image2-3.png" alt="image" width="700">
