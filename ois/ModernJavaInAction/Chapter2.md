@@ -291,7 +291,7 @@ List<Apple> redApples = filterApples(inventory, new ApplePredicate() {
 });
 ```
 
-- ApplePredicate의 구현체를 따로 만들지 않고 filerApples()에서 바로 구현
+- ApplePredicate의 구현체를 따로 만들지 않고 filterApples()에서 바로 구현
 - 장황함, verbosity
     - 여전히 반복되는 코드 존재 → 공간 차지
 - 많은 프로그래머가 익명 클래스에 익숙하지 않다?
