@@ -284,8 +284,8 @@ public class FilteringApples {
 ### 2.3.2 다섯 번째 시도 : 익명 클래스 사용
 
 ```java
-**List<Apple> redApples = filterApples(inventory, new ApplePredicate() {
-    public boolean test(Apple apple)** {
+List<Apple> redApples = filterApples(inventory, new ApplePredicate() {
+    public boolean test(Apple apple) {
         return RED.equals(apple.getColor());		
     }
 });
