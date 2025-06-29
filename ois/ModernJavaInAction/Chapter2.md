@@ -342,14 +342,10 @@ List<Apple> result = filterApples(inventory, (Apple apple) -> RED.equals(apple.g
     
     | **인터페이스** | **제네릭 정의** | **입력 → 출력** | **용도** | **실제 사용 예시** |
     | --- | --- | --- | --- | --- |
-    | Predicate<T> | <T> | T → boolean | 조건 검사 | (Apple a) → a.getWeight() > 150 
-    (150g 이상 사과 필터링) |
-    | Function<T,R> | <T, R> | T → R | 타입 변환/추출 | (String s) → s.length() 
-    (문자열 → 길이 변환) |
-    | Supplier<T> | <T> | () → T | 값 생성/제공 | () → new Random().nextInt() 
-    (랜덤 정수 생성) |
-    | Consumer<T> | <T> | T → void | 소비 연산 | (String s) → System.out.println(s) 
-    (문자열 출력) |
+    | Predicate<T> | <T> | T → boolean | 조건 검사 | (Apple a) → a.getWeight() > 150(150g 이상 사과 필터링) |
+    | Function<T,R> | <T, R> | T → R | 타입 변환/추출 | (String s) → s.length()(문자열 → 길이 변환) |
+    | Supplier<T> | <T> | () → T | 값 생성/제공 | () → new Random().nextInt()(랜덤 정수 생성) |
+    | Consumer<T> | <T> | T → void | 소비 연산 | (String s) → System.out.println(s)(문자열 출력) |
 
 ## 2.4 실전 예제
 
