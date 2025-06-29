@@ -238,3 +238,139 @@ public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) 
 - ApplePredicate의 구현 객체에 의해 filterApples 메서드의 동작 결정!
   <img src="./images/image2-2.png" alt="image" width="700">
   <img src="./images/image2-3.png" alt="image" width="700">
+
+## 2.3 복잡한 과정 간소화
+현재 filterApples 메서드로 새로운 동작을 전달하려면 ApplePredicate 인터페이스를 구현하는 여러 클래스를 정의한 다음 인스턴스화 해야 한다.
+```java
+public class AppleHeavyWeightPredicate implements ApplePredicate {
+    public boolean teset(Apple apple) {
+        return apple.getWeight() > 150;
+    }
+}
+
+public class AppleGreenColorPredicate implements ApplePredicate {
+    public boolean test(Apple apple) {
+        return GREEN.equals(apple.getColor());
+    }
+}
+
+public class FilteringApples {
+    public static void main(String[] args) {
+        List<Apple> inventory = Arrays.asList(new Apple(80, GREEN),
+                                              new Apple(155, GREEN),
+                                              new Apple(120, RED));
+                                                                                    
+        List<Apple> heavyApples = filterApples(inventory, new AppleHeavyWeightPredicate());
+        List<Apple> greenApples = filterApples(inventory, new AppleGreenColorPredicate());
+    }
+    
+    public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
+        List<Apple> result = new ArrayList<>();
+        for (Apple apple : inventory) {
+            if (p.test(apple)) {
+                result.add(apple);
+            }
+        }
+        
+        return result;
+    }
+}
+```
+
+### 2.3.1 익명 클래스
+
+- 지역 클래스, 블록 내부에 선언된 클래스
+
+### 2.3.2 다섯 번째 시도 : 익명 클래스 사용
+
+```java
+**List<Apple> redApples = filterApples(inventory, new ApplePredicate() {
+    public boolean test(Apple apple)** {
+        return RED.equals(apple.getColor());		
+    }
+});
+```
+
+- ApplePredicate의 구현체를 따로 만들지 않고 filerApples()에서 바로 구현
+- 장황함, verbosity
+    - 여전히 반복되는 코드 존재 → 공간 차지
+- 많은 프로그래머가 익명 클래스에 익숙하지 않다?
+
+### 2.3.3 여섯 번째 시도 : 람다 표현식 사용
+
+```java
+List<Apple> result = filterApples(inventory, (Apple apple) -> RED.equals(apple.getColor()));
+```
+
+- 단일 추상 메서드 인터페이스 조건 충족
+- 메서드 시그니처 일치
+
+### 2.3.4 일곱 번째 시도 : 리스트 형식으로 추상화
+
+- 지금까지 filterApples는 사과만 필터링 하는, 타입에 종속된 형태
+- 정수, 문자열 등을 필터링 하려면 또 다른 메서드 필요 → 코드 중복
+- 제네릭 도입
+    
+    ```java
+    // 모든 타입 T에 대응하는 인터페이스
+    public interface Predicate<T> {
+        boolean test(T t);
+    }
+    
+    // 모든 타입을 처리하는 범용 필터 메서드
+    public static <T> List<T> filter(List<T> list, Predicate<T> p) {
+        List<T> result = new ArrayList<>();
+        for (T e : list) {
+            if (p.test(e)) {
+                result.add(e);
+            }
+        }
+        
+        return result;
+    }
+    ```
+    
+- 실제 사용
+    
+    ```java
+    List<Apple> redApples = filter(inventory, (Apple apple) -> RED.equals(apple.getColor()));
+    List<Integer> evenNumbers = filter(numbers, (Integer i) -> i % 2 == 0);
+    ```
+    
+- 자바의 함수형 인터페이스
+    
+    
+    | **인터페이스** | **제네릭 정의** | **입력 → 출력** | **용도** | **실제 사용 예시** |
+    | --- | --- | --- | --- | --- |
+    | Predicate<T> | <T> | T → boolean | 조건 검사 | (Apple a) → a.getWeight() > 150 
+    (150g 이상 사과 필터링) |
+    | Function<T,R> | <T, R> | T → R | 타입 변환/추출 | (String s) → s.length() 
+    (문자열 → 길이 변환) |
+    | Supplier<T> | <T> | () → T | 값 생성/제공 | () → new Random().nextInt() 
+    (랜덤 정수 생성) |
+    | Consumer<T> | <T> | T → void | 소비 연산 | (String s) → System.out.println(s) 
+    (문자열 출력) |
+
+## 2.4 실전 예제
+
+### 2.4.1 Comparator로 정렬하기
+
+- sort 메서드는 List에도 Collections에도 포함되어 있다.
+- Comparator를 이용해서 sort의 동작을 파라미터화 하면 기본 정렬보다 유연한 정렬이 가능하다.
+    
+    ```java
+    // java.util.Comparator
+    public interface Comparator<T> {
+        int compare(T o1, T o2);
+    }
+    
+    // Comparator 정의하여 무게 순으로 정렬
+    inventory.sort(new Comparator<Apple>() {
+        public int compare(Apple a1, Apple a2) {
+            return a1.getWeight().compareTo(a2.getWeight());
+        }
+    });
+    
+    // 람다 적용
+    inventory.sort((Apple a1, Appple a2) -> a1.getWiehgt().compareTo(a2.getWeight()));
+    ```
