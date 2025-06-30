@@ -40,4 +40,5 @@
     
     (Apple a1, Appple a2) -> a1.getWiehgt().compareTo(a2.getWeight())
     ```
+    <img src="./images/table3-1.png" alt="image" width="700">
     
