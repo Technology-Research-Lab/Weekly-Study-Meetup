@@ -1,0 +1,43 @@
+# Chpater 3.
+
+# 람다 표현식
+
+## 3.1 람다란 무엇인가?
+
+- 특징
+    - 익명
+        - 이름이 없는 메서드
+    - 함수
+        - 특정 클래스에 종속되지 않음
+        - 메서드와 같이 파라미터, 바디, 반환 형식, 예외 리스트 포함
+    - 전달
+        - 메서드 인수로 전달 또는 변수로 저장 가능
+    - 간결성
+        - 익명 클래스에 비해 훨씬 간결
+- 용어(lambda)
+    - 미적분학 학계에서 개발한 시스템에서 유래
+- 람다는 왜 이용하는가?
+    - 어떤 메서드에 인자로 동작을 외부에서 전달할 때(동작 파라미터화), 간결하게 구현 가능해서
+- 구성
+    
+    ```java
+    inventory.sort((Apple a1, Appple a2) -> a1.getWiehgt().compareTo(a2.getWeight()));
+    ```
+    
+    - 파라미터 리스트, 화살표, 람다 바디(실행문)
+- 자바 8의 대표적인 람다 표현식
+    
+    ```java
+    (String s) -> s.length()
+    
+    (Apple a) -> a.getWeight() > 150
+    
+    (int x, int y) -> {
+      System.out.println(x + y);
+    }
+    
+    () -> 42
+    
+    (Apple a1, Appple a2) -> a1.getWiehgt().compareTo(a2.getWeight())
+    ```
+    
