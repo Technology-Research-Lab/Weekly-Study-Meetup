@@ -26,5 +26,5 @@
     
     - 파라미터 리스트, 화살표, 람다 바디(실행문)
 - 자바 8의 대표적인 람다 표현식
-    <img src="./images/table3-1.png" alt="image" width="700">
+  <img src="./images/table3-1.png" alt="image" width="700">
     
