@@ -26,19 +26,5 @@
     
     - 파라미터 리스트, 화살표, 람다 바디(실행문)
 - 자바 8의 대표적인 람다 표현식
-    
-    ```java
-    (String s) -> s.length()
-    
-    (Apple a) -> a.getWeight() > 150
-    
-    (int x, int y) -> {
-      System.out.println(x + y);
-    }
-    
-    () -> 42
-    
-    (Apple a1, Appple a2) -> a1.getWiehgt().compareTo(a2.getWeight())
-    ```
     <img src="./images/table3-1.png" alt="image" width="700">
     
