@@ -188,14 +188,14 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     }
     
     public <T> List<T> filter(List<T> list, Predicate<T> p) {
-    	List<T> results = new ArrayList<>();
-    	for (T t : list) {
-    		if (p.test(t)) {
-    			results.add(t);
-    		}
-    	}
-    		
-    	return results;
+        List<T> results = new ArrayList<>();
+        for (T t : list) {
+            if (p.test(t)) {
+                results.add(t);
+            }
+        }
+            
+        return results;
     }
     
     Predicate<String> nonEmptyStringPredicate = (String s) -> !s.isEmpty();
@@ -212,7 +212,7 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     ```java
     @FunctionalInterface
     public interface Consumer<T> {
-    	void accept(T t);
+        void accept(T t);
     }
     
     public <T> void forEach(List<T> list, Consumer<T> c) {
