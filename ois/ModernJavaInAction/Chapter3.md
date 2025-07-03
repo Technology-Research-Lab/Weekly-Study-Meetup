@@ -164,3 +164,63 @@
 String oneLine = processFile((BufferedReader br) -> br.readLine());
 String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine());
 ```
+
+## 3.4 함수형 인터페이스 사용
+
+- 오직 하나의 추상 메서드
+- 람다 표현식 → 추상 메서드의 구현식
+    - 시그니처가 일치해야 한다.
+    - 매개변수 타입과 개수, 반환 타입일 일치해야 한다.
+- 함수형 인터페이스의 추상 메서드 시그니처를 함수 디스크립터라고 한다.
+- 함수형 프로그래밍 지원을 위해 java.util.function 패키지에 다양한 함수형 인터페이스 추가
+    - Predicate, Consumer, Function 등
+
+### 3.4.1 Predicate
+
+- 패키지 : java.util.function.Predicate<T>
+- 추상 메서드 : test()
+- 시그니처 : T 타입의 인자를 받아 Boolean 타입 반환
+    
+    ```java
+    @FunctionalInterface
+    public interface Predicate<T> {
+        boolean test(T t);
+    }
+    
+    public <T> List<T> filter(List<T> list, Predicate<T> p) {
+    	List<T> results = new ArrayList<>();
+    	for (T t : list) {
+    		if (p.test(t)) {
+    			results.add(t);
+    		}
+    	}
+    		
+    	return results;
+    }
+    
+    Predicate<String> nonEmptyStringPredicate = (String s) -> !s.isEmpty();
+    List<String> nonEmpty = filter(listOfStrings, nonEmptyStringPredicate);
+    ```
+    
+
+### 3.4.2 Consumer
+
+- 패키지 : java.util.function.Consumer<T>
+- 추상 메서드 : accept()
+- 시그니처 : T 타입의 인자를 받아 void 반환
+    
+    ```java
+    @FunctionalInterface
+    public interface Consumer<T> {
+    	void accept(T t);
+    }
+    
+    public <T> void forEach(List<T> list, Consumer<T> c) {
+    	for (T t : list) {
+            c.accept(t);
+    	}
+    }
+    
+    // 람다가 Consumer의 accept() 구현
+    forEach(Arrays.asList(1, 2, 3, 4, 5), (Integer i) -> System.out.println(i));
+    ```
