@@ -216,9 +216,9 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     }
     
     public <T> void forEach(List<T> list, Consumer<T> c) {
-    	for (T t : list) {
+        for (T t : list) {
             c.accept(t);
-    	}
+        }
     }
     
     // 람다가 Consumer의 accept() 구현
