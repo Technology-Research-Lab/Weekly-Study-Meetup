@@ -202,7 +202,6 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     List<String> nonEmpty = filter(listOfStrings, nonEmptyStringPredicate);
     ```
     
-
 ### 3.4.2 Consumer
 
 - 패키지 : java.util.function.Consumer<T>
@@ -224,3 +223,53 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     // 람다가 Consumer의 accept() 구현
     forEach(Arrays.asList(1, 2, 3, 4, 5), (Integer i) -> System.out.println(i));
     ```
+
+### 3.4.3 Function
+
+- 패키지 : java.util.function.Function<T, R>
+- 추상 메서드 : apply()
+- 시그니처 : T 타입의 인자를 받아서 R 객체를 반환
+    - 입력을 출력으로 매핑
+        
+        ```java
+        @FunctionalInterface
+        public interface Function<T, R> {
+            R apply(T t);
+        }
+        
+        public <T, R> List<R> map(List<T> list, Function<T, R> f) {
+            List<R> result = new ArrayList<>();
+            for (T t : list) {
+                result.add(f.apply(t));
+            }
+            
+            return result;
+        }
+        
+        // [7, 2, 6]
+        List<Integer> l = map(
+            Arrays.asList("lambda", "in", "action"), (String s) -> s.length();
+        )
+        ```
+        
+
+### 기본형 특화
+
+- 자바의 모든 형식은 참조형 또는 기본형
+- 제네릭 파라미터에는 참조형만 사용 가능
+    - 박싱 : 기본형 → 참조형
+    - 언박싱 : 참조형 → 기본형
+    - 오토박싱
+        
+        ```java
+        // int -> Integer
+        List<Integer> list = new ArrayList<>();
+        for (int i = 300; i < 400; i++) {
+            list.add(i);
+        }
+        ```
+        
+        - 박싱하면 기본형이 참조형으로 감싸지고 힙에 저장된다.      
+            → 메모리 탐색 → 비용 up
+          
+      - Function 인터페이스는 다양한 출력 형식 파라미터를 제공한다.
