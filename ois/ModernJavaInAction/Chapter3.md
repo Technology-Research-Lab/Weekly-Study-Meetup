@@ -273,4 +273,4 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
             → 메모리 탐색 → 비용 up
           
       - Function 인터페이스는 다양한 출력 형식 파라미터를 제공한다.
-        <img src="./images/table3-2.png" alt="image" width="700">
+        <img src="./images/table3-2.png" alt="image" width="500">
