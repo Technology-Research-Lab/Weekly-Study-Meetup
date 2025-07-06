@@ -35,45 +35,36 @@
     - 람다는 함수형 인터페이스가 갖고 있는 단일 추상 메서드의 구현식
 
 ### 3.2.1 함수형 인터페이스
-
-- Prdicate<T>
-    
+- 오직 하나의 추상 메서드를 갖는다.    
     ```java
-    public interface Predicate<T> {
-        boolean test(T t);
+    // java.util.Comparator
+    public interface Comparator<T> {
+        int compare(T o1, T o2);
+    }
+    
+    // java.lang.Runnable
+    public interface Runnable {
+        void run();
+    }
+    
+    // java.awt.event.ActionListener
+    public interface ActionListener extends EventListener {
+        void actionPerformed(ActionEvent e);
+    }
+    
+    // java.util.concurrent.Callable
+    public interface Callable<V> {
+        V call() throws Exception;
+    }
+    
+    // java.security.PrivilegedAction
+    public interface PrivilegedAction<T> {
+        T run();
     }
     ```
     
-    - 오직 하나의 추상 메서드를 갖는다.    
-        ```java
-        // java.util.Comparator
-        public interface Comparator<T> {
-            int compare(T o1, T o2);
-        }
-        
-        // java.lang.Runnable
-        public interface Runnable {
-            void run();
-        }
-        
-        // java.awt.event.ActionListener
-        public interface ActionListener extends EventListener {
-            void actionPerformed(ActionEvent e);
-        }
-        
-        // java.util.concurrent.Callable
-        public interface Callable<V> {
-            V call() throws Exception;
-        }
-        
-        // java.security.PrivilegedAction
-        public interface PrivilegedAction<T> {
-            T run();
-        }
-        ```
-        
-        > 인터페이스는 디폴트 메서드를 포함할 수 있다. 많은 디폴트 메서드가 있어도 추상 메서드가 하나면 함수형 인터페이스다.
-        > 
+    > 인터페이스는 디폴트 메서드를 포함할 수 있다. 많은 디폴트 메서드가 있어도 추상 메서드가 하나면 함수형 인터페이스다.
+    > 
 - 함수형 인터페이스의 추상 메서드 구현을 람다로 구현 후 다른 메서드의 인자(동작)로 전달 가능하므로, 람다 자체를 함수형 인터페이스의 인스턴스라 할 수 있다.
     
     ```java
