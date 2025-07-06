@@ -158,7 +158,6 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
 
 - 오직 하나의 추상 메서드
 - 람다 표현식 → 추상 메서드의 구현식
-    - 시그니처가 일치해야 한다.
     - 매개변수 타입과 개수, 반환 타입일 일치해야 한다.
 - 함수형 인터페이스의 추상 메서드 시그니처를 함수 디스크립터라고 한다.
 - 함수형 프로그래밍 지원을 위해 java.util.function 패키지에 다양한 함수형 인터페이스 추가
