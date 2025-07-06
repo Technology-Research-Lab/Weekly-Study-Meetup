@@ -105,14 +105,14 @@
     </tr>
     <tr>
       <!-- 2회차의 두 번째 줄 회차, 일자 칸 생략-->
-      <td style="text-align: left;"><a href=https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/donghyun/backgroundofoperatingsystem/backgroud/background_2.md">CS 운영체제 배경지식 2</td>
+      <td style="text-align: left;"><a href="https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/donghyun/backgroundofoperatingsystem/backgroud/background_2.md">CS 운영체제 배경지식 2</td>
       <td style="text-align: center;">운영체제</td>
       <td style="text-align: center;">김동현</td>
       <td style="text-align: left;"></td>
     </tr>
     <tr>
       <!-- 2회차의 세 번째 줄 회차, 일자 칸 생략-->
-      <td style="text-align: left;"><a href=https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/ois/ModernJavaInAction/Chapter2.md">동작 파라미터화 코드 전달하기</td>
+      <td style="text-align: left;"><a href="https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/ois/ModernJavaInAction/Chapter2.md">동작 파라미터화 코드 전달하기</td>
       <td style="text-align: center;">Java</td>
       <td style="text-align: center;">iam52</td>
       <td style="text-align: left;"></td>
@@ -128,14 +128,14 @@
     </tr>
     <tr>
       <!-- 3회차의 두 번째 줄 회차, 일자 칸 생략-->
-      <td style="text-align: left;"><a href=https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/donghyun/backgroundofoperatingsystem/os/os(1).md">운영체제의 목적과 기능</td>
+      <td style="text-align: left;"><a href="https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/donghyun/backgroundofoperatingsystem/os/os(1).md">운영체제의 목적과 기능</td>
       <td style="text-align: center;">운영체제</td>
       <td style="text-align: center;">김동현</td>
       <td style="text-align: left;"></td>
     </tr>
     <tr>
       <!-- 3회차의 세 번째 줄 회차, 일자 칸 생략-->
-      <td style="text-align: left;"><a href=https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/ois/ModernJavaInAction/Chapter3.md">람다 표현식</td>
+      <td style="text-align: left;"><a href="https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/ois/ModernJavaInAction/Chapter3.md">람다 표현식</td>
       <td style="text-align: center;">Java</td>
       <td style="text-align: center;">iam52</td>
       <td style="text-align: left;"></td>
