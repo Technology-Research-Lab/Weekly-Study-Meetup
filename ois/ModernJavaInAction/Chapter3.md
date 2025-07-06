@@ -44,9 +44,7 @@
     }
     ```
     
-    - 오직 하나의 추상 메서드를 갖는다.
-    - 정확히 하나의 추상 메서드를 지정하는 인터페이스다.
-        
+    - 오직 하나의 추상 메서드를 갖는다.    
         ```java
         // java.util.Comparator
         public interface Comparator<T> {
