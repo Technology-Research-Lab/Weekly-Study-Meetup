@@ -262,3 +262,100 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
           
       - Function 인터페이스는 다양한 출력 형식 파라미터를 제공한다.
         <img src="./images/table3-2.png" alt="image" width="600">
+
+## 3.5 형식 검사, 형식 추론, 제약
+
+### 3.5.1 형식 검사
+
+- 람다의 형식 추론과 콘텍스트(context)?
+    - 람다가 사용되는 상황 즉, 콘텍스트를 보고 컴파일러가 람다의 타입을 추측한다.
+    - context
+        - 람다가 사용되는 위치, 상황
+        - 파라미터? 변수?
+        - 그 자리에 어떤 타입의 함수가 필요한지 이미 정해져 있다. → 대상 형식
+- 형식 확인 과정
+    
+    ```java
+    List<Apple> heavierThan150g = ilter(inventory, (Apple apple) -> apple.getWeight() > 150);
+    ```
+    
+    1. filter 메서드의 선언을 확인한다.
+    2. filter 메서드는 두 번째 파라미터로 Predicate<Apple> 형식을 기대한다. → 대상 형식
+    3. Predicate<Apple>은 test라는 한 개의 추상 메서드를 정의하는 함수형 인터페이스다.
+    4. test 메서드는 Apple을 받아 boolean을 반환하는 함수 디스크립터를 묘사한다.
+    5. filter 메서드로 전달된 인수는 이와 같은 요구사항을 만족해야 한다.
+
+> 다이아몬드 연산자
+> 
+> - <>
+>     - 콘텍스트에 따른 제네릭 형식 추론
+
+### 3.5.2 같은 람다, 다른 함수형 인터페이스
+
+- 시그니처만 같다면 어떤 함수형 인터페이스든 같은 형식의 람다로 표현 할 수 있다.
+    
+    ```java
+    Callable<Integer> c = () -> 42;
+    PrivilegedAction<Integer> p = () -> 42;
+    
+    Comparator<Apple> c1 = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+    ToIntBiFunction<Apple, Apple> c2 = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+    BiFunction<Apple, Apple, Integer> c3 = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+    ```
+    
+
+### 3.5.3 형식 추론
+
+- 콘텍스트(대상 형식) → 함수 디스크립터 → 람다 시그니처 추론 가능
+    
+    ```java
+    Comparator<Apple> c = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+    Comparator<Apple> c = (a1, a2) -> a1.getWeight().compareTo(a2.getWeight());
+    ```
+    
+
+### 3.5.4 지역 변수 사용
+
+- 람다 캡처링
+    - 람다 바디 안에서 외부 변수를 끌어와 사용할 수 있다.
+        
+        ```java
+        public static void main(String[] args) {
+            int value = 3;
+            List<Intger> list = Arrays.asList(1, 2, 3, 4);
+            
+            list.forEach(x -> {
+                if (x == value) { // 람다 안에서 외부 변수 value 사용
+                    System.out.println("같다");
+                }
+          });
+        }
+        
+        public class Example {
+            private String message = "Hello";
+            public void printMessage() {
+                Runnable r = () -> System.out.println(message); // 인스턴스 변수 캡처
+                r.run();
+            }
+        }
+        ```
+        
+        - 제약 사항
+            - 인스턴스 변수, 정적 변수 → 자유롭게 캡처 가능
+            - 지역 변수 → final 선언
+            - 컴파일 할 수 없는 코드
+                
+                ```java
+                int portNumber = 1337;
+                Runnable r = () -> System.out.println(portNumber);
+                portNumber = 31337;
+                ```
+                
+                - 지역 변수는 final 또는 final처럼 취급(effectively final)되어야 한다.
+                    
+                    ⇒ 값이 바뀌면 안된다.
+                    
+                    - 인스턴스 변수 → 힙 메모리, 지역 변수 → 스택 메모리
+                        - 람다에서 지역 변수를 캡처하는 경우 변수 할당이 해제 된 경우에도 해당 변수에 접근하려 할 수있다.
+                        - 이 때문에 자바에서는 변수에 직접 접근이 아닌 복사본을 제공한다.
+                        - 복사본의 값은 바뀌지 않아야 한다.
