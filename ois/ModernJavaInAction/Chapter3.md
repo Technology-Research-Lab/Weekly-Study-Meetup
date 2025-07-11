@@ -359,3 +359,76 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
                         - 람다에서 지역 변수를 캡처하는 경우 변수 할당이 해제 된 경우에도 해당 변수에 접근하려 할 수 있다.
                         - 이 때문에 자바에서는 변수에 직접 접근이 아닌 복사본을 제공한다.
                         - 복사본의 값은 바뀌지 않아야 한다.
+## 3.6 메서드 참조
+
+- 함수형 인터페이스가 요구하는 메서드 시그니처가 일치하는 메서드만 메서드 참조로 전달 가능하다.
+    
+    ```java
+    // 기존 람다 코드
+    inventory.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
+    
+    // 메서드 참조로 표현
+    inventory.sort(comparing(Apple::getWeight));
+    ```
+    
+
+### 3.6.1 요약
+
+- 특정 메서드만을 호출하는람다의 축약형
+- **람다 표현식**: 어떤 동작(함수)을 값처럼 전달하는 자바 8의 문법
+- **메서드 참조**: 이미 만들어진 메서드(구현)를, 람다처럼 전달할 수 있게 해주는 문법    
+
+### 메서드 참조를 만드는 방법
+
+1. 정적 메서드 참조
+    
+    ```java
+    Integer::parseInt
+    ```
+    
+    - 정적 메서드? static으로 클래스에 딸려있는 함수 → 객체를 만들지 않아도 사용 가능
+    - 객체를 만들지 않고 Integer 클래스의 parseInt() 메서드를 바로 참조
+        - 단순히 입력값을 받아 결과 반환
+2. 다양한 형식의 인스턴스 메서드 참조
+    
+    ```java
+    String::length
+    ```
+    
+    - 인스턴스 메서드? 생성된 객체에 딸려있는 함수 → 객체를 생성해야 사용 가능
+        - 문자열의 길이는 각 String마다 달라
+3. 기존 객체의 인스턴스 메서드 참조
+    
+    ```java
+    expensiveTransaction::getValue
+    ```
+    
+    - 특정 객체에 바인딩된 메서드 참조
+    - 헬퍼 메서드 활용
+
+### 3.6.2 생성자 참조
+
+- ClassName::new ⇒ new 키워드를 이용한 기존 생성자의 참조
+- Supplier의 get 메서드를 호출해서 새로운 Apple 객체를 만들 수 있다.
+    
+    ```java
+    Supplier<Apple> c1 = Apple::new;
+    Apple a1 = c1.get();
+    ```
+    
+    ```java
+    Supplier<Apple> c1 = () -> new Apple();
+    Apple a1 = c1.get();
+    ```
+    
+- Apple(Integer weight) 시그니처를 갖는 생성자는 Function 인터페이스의 시그니처와 같다.
+    
+    ```java
+    Function<Integer, Apple> c2 = Apple::new;
+    Apple a2 = c2.apply(100);
+    ```
+    
+    ```java
+    Function<Integer, Apple> c2 = (weight) -> new Apple(weight);
+    Apple a2 = c2.apply(100);
+    ```
