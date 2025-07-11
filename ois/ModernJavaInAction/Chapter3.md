@@ -276,7 +276,7 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
 - 형식 확인 과정
     
     ```java
-    List<Apple> heavierThan150g = ilter(inventory, (Apple apple) -> apple.getWeight() > 150);
+    List<Apple> heavierThan150g = filter(inventory, (Apple apple) -> apple.getWeight() > 150);
     ```
     
     1. filter 메서드의 선언을 확인한다.
