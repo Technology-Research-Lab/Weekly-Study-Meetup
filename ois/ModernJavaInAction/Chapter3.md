@@ -378,7 +378,7 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
 - **람다 표현식**: 어떤 동작(함수)을 값처럼 전달하는 자바 8의 문법
 - **메서드 참조**: 이미 만들어진 메서드(구현)를, 람다처럼 전달할 수 있게 해주는 문법
 
-    <img src="./images/table3-4.png" alt="image" width="500">
+    <img src="./images/table3-4.png" alt="image" width="700">
 
 ### 메서드 참조를 만드는 방법
 
