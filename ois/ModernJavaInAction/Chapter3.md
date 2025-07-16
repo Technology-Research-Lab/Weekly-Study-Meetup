@@ -434,3 +434,28 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     Function<Integer, Apple> c2 = (weight) -> new Apple(weight);
     Apple a2 = c2.apply(100);
     ```
+    
+## 3.7 람다, 메서드 참조 활용하기
+
+사과 리스트를 정렬하면서 동작 파라미터화에서 메서드 참조까지 적용 해보기
+
+### 3.7.1 1단계 : 코드 전달
+
+- sort() 메서드 시그니처
+    
+    ```java
+    void sort(Comparator<? super E> c)
+    ```
+    
+    - Comparator 객체를 인수로 받아 두 인자를 비교한다. → 이미 동작이 파라미터화 되어있다.
+        - sort에 전달된 정렬 전략에 따라 다양한 정렬을 할 수 있다.
+- 정렬 전략 전달
+    
+    ```java
+    public class AppleComparator implements Comparator<Apple> {
+        public int compare(Apple a1, Apple a2) {
+            return a1.getWeight().compareTo(a2.getWeight());
+        }
+    }
+    inventory.sort(new AppleComparator());
+    ```
