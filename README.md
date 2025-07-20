@@ -134,8 +134,31 @@
       <td style="text-align: left;"></td>
     </tr>
     <tr>
-      <!-- 3회차의 세 번째 줄 회차, 일자 칸 생략-->
+      <!-- 4회차의 세 번째 줄 회차, 일자 칸 생략-->
       <td style="text-align: left;"><a href="https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/ois/ModernJavaInAction/Chapter3.md">람다 표현식</td>
+      <td style="text-align: center;">Java</td>
+      <td style="text-align: center;">iam52</td>
+      <td style="text-align: left;"></td>
+    </tr>
+          <!-- 4회차 그룹 (총 3줄) -->
+    <tr>
+      <td rowspan="3" style="text-align: center; vertical-align: middle;">4</td>
+      <td rowspan="3" style="text-align: left; vertical-align: middle;">2025-07-13</td>
+      <td style="text-align: left;"><a href="https://dongwookim4343.tistory.com/2">DB 동시성 제어 Schedule, Serializability 기본 정리</a></td>
+      <td style="text-align: center;">데이터베이스</td>
+      <td style="text-align: center;">김동우</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr>
+      <!-- 4회차의 두 번째 줄 회차, 일자 칸 생략-->
+      <td style="text-align: left;"><a href="https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/donghyun/backgroundofoperatingsystem/os/os(1).md">운영체제의 목적과 기능</td>
+      <td style="text-align: center;">운영체제</td>
+      <td style="text-align: center;">김동현</td>
+      <td style="text-align: left;"></td>
+    </tr>
+    <tr>
+      <!-- 4회차의 세 번째 줄 회차, 일자 칸 생략-->
+      <td style="text-align: left;"><a href="https://github.com/Technology-Research-Lab/Weekly-Study-Meetup/blob/main/ois/ModernJavaInAction/Chapter3.md">람다 표현식2</td>
       <td style="text-align: center;">Java</td>
       <td style="text-align: center;">iam52</td>
       <td style="text-align: left;"></td>
