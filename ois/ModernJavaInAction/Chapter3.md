@@ -459,3 +459,38 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     }
     inventory.sort(new AppleComparator());
     ```
+    Comparator를 구현한 구현체를 만들어 sort()에 인자로 직접 전달
+
+### 3.7.2 2단계 : 익명 클래스 사용
+
+- AppleComparator는 현재 sort() 만을 위한 정렬 방법 → 재사용하지 않음 → class로 따로 구현하는 건 비용 발생 → 익명 클래스 사용
+    
+    ```java
+    inventory.sort(new Comparator<Apple>() {
+        public int compare(Apple a1, Apple a2) {
+            return a1.getWeight().compareTo(a2.getWeight());
+        }
+    });
+    ```
+    
+
+### 3.7.3 3단계 : 람다 표현식 사용
+
+- 익명 클래스는 코드가 장황해짐 → 람다로 경량화 가능
+    - 함수형 인터페이스를 기대하는 곳은 어디에서나 람다 표현식 사용이 가능하다
+    - 함수형 인터페이스는 하나의 추상 메서드를 갖는 인터페이스다.
+    - 함수형 인터페이스의 추상 메서드의 시그니처는 함수 디스크립터라 하고, 람다 표현식의 시그니처를 정의한다.
+        - 추상 메서드의 함수 디스크립터가 람다의 시그니처를 결정한다.
+        - Compartor의 함수 디스크립터 즉, 추상 메서드 compare의 시그니처는 (T, T) → int
+            
+            ⇒ 람다 표현식도 (T, T) → int 형식이 되어야 한다. 
+            
+            ```java
+            inventory.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
+            ```
+            
+- 자바 컴파일러 → 람다 콘텍스트 → 람다 파라미터 형식 추론 → 파라미터 생략 가능
+    
+    ```java
+    inventory.sort((a1, a2) -> a2.getWeight().compareTo(a2.getWeight()));
+    ```  
