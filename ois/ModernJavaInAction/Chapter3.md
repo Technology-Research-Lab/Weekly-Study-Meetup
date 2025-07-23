@@ -459,7 +459,7 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     }
     inventory.sort(new AppleComparator());
     ```
-    Comparator를 구현한 구현체를 만들어 sort()에 인자로 직접 전달
+    - Comparator를 구현한 구현체를 만들어 sort()에 인자로 직접 전달
 
 ### 3.7.2 2단계 : 익명 클래스 사용
 
