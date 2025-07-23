@@ -463,7 +463,7 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
 
 ### 3.7.2 2단계 : 익명 클래스 사용
 
-- AppleComparator는 현재 sort() 만을 위한 정렬 방법 → 재사용하지 않음 → class로 따로 구현하는 건 비용 발생 → 익명 클래스 사용
+- AppleComparator는 sort() 만을 위한 정렬 방법 → 재사용하지 않음 → class로 따로 구현하는 건 비용 발생 → 익명 클래스 사용
     
     ```java
     inventory.sort(new Comparator<Apple>() {
