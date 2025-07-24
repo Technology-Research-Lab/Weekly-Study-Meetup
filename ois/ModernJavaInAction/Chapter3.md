@@ -494,3 +494,19 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
     ```java
     inventory.sort((a1, a2) -> a2.getWeight().compareTo(a2.getWeight()));
     ```  
+- 코드의 가독성을 더 향상 시키는 방법
+    - Comparator의 정적 메서드 comparing 사용
+        
+        ```java
+        Comparator<Apple> c = Comparator.comparing((Apple a) -> a.getWeight());
+        
+        import static java.util.Comparator.comparing;
+        inventory.sort(comparing(apple -> apple.getWeight()));
+        ```
+        
+
+### 3.7.4 4단계 : 메서드 참조 사용
+
+```java
+inventory.sort(comparing(Apple::getWeight));
+```
