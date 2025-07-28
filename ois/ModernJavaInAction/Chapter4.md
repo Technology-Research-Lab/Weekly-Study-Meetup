@@ -30,19 +30,19 @@
                 List<Dish> lowCaloricDishes = new ArrayList<>();
                 for (Dish dish : menu) {
                     if (dish.getCalories() < 400) {
-                				lowCaloricDishes.add(dish);
-                		}
+                        lowCaloricDishes.add(dish);
+                    }
                 }
                 
                 Collections.sort(lowCaloricDishes, new Comparator<Dish>() {
-                		public int compare(Dish dish1, Dish dish2) {
-                				return Integer.compare(dish1.getCalories(), dish2.getCarlories());
-                		}
+                    public int compare(Dish dish1, Dish dish2) {
+                        return Integer.compare(dish1.getCalories(), dish2.getCarlories());
+                    }
                 });
                 
                 List<String> lowCaloricDishesName = new ArrayList<>();
                 for (Dish dish : lowCaloricDishes) {
-                		lowCaloricDishesName.add(dish.getName());
+                    lowCaloricDishesName.add(dish.getName());
                 }
                 ```
                 
@@ -53,11 +53,11 @@
                 import static java.util.stream.Collectors.toList;
                 
                 List<String> lowCaloricDishesName = 
-                						menu.stream()
-                								.filter(d -> d.getCalories() < 400)
-                								.sorted(comparing(Dish::getCalories))
-                								.map(Dish::getName)
-                								.collect(toList());
+                            menu.stream()
+                                .filter(d -> d.getCalories() < 400)
+                                .sorted(comparing(Dish::getCalories))
+                                .map(Dish::getName)
+                                .collect(toList());
                 ```
                 
                 - parallelStream() 사용하면 멀티코어 아키텍처에서 병렬로 실행 가능
