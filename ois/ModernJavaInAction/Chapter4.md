@@ -64,6 +64,7 @@
 <aside>
     
     ⛔ ### 사용 예제
+    
     ```java
     List<Dish> menu = Arrays.asList(
         new Dish("pork", false, 800, Dish.Type.MEAT),
