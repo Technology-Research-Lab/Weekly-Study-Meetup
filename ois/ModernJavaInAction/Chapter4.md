@@ -63,8 +63,7 @@
                 - parallelStream() 사용하면 멀티코어 아키텍처에서 병렬로 실행 가능
  
 ⛔ ### 사용 예제
-
-    ```java
+```java
     List<Dish> menu = Arrays.asList(
         new Dish("pork", false, 800, Dish.Type.MEAT),
         new Dish("beef", false, 700, Dish.Type.MEAT), 
@@ -99,7 +98,7 @@
         public String toString() { return name; }
         public enum Type { MEAT, FISH, OTHER }
     }
-    ```
+```
 
 ## 4.2 스트림 시작하기
 
