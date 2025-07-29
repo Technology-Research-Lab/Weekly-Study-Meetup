@@ -61,3 +61,85 @@
                 ```
                 
                 - parallelStream() 사용하면 멀티코어 아키텍처에서 병렬로 실행 가능
+  <aside>
+⛔
+
+### 사용 예제
+
+```java
+List<Dish> menu = Arrays.asList(
+    new Dish("pork", false, 800, Dish.Type.MEAT),
+    new Dish("beef", false, 700, Dish.Type.MEAT), 
+    new Dish("chicken", false, 400, Dish.Type.MEAT), 
+    new Dish("french fries", true, 530, Dish.Type.OTHER), 
+    new Dish("rice", true, 350, Dish.Type.OTHER), 
+    new Dish("season fruit", true, 120, Dish.Type.OTHER), 
+    new Dish("pizza", true, 550, Dish.Type.OTHER), 
+    new Dish("prawns", false, 300, Dish.Type.FISH), 
+    new Dish("salmon", false, 450, Dish.Type.FISH)
+);
+
+public class Dish { private final String name;
+    private final boolean vegetarian;
+    private final int calories;
+    private final Type type;
+    public Dish(String name, 
+        
+    boolean vegetarian, int calories, Type type) {
+        this.name = name;
+        this.vegetarian = vegetarian;
+        this.calories = calories;
+        this.type = type;
+    }
+    
+    public String getName() { return name; }
+    public boolean isVegetarian() { return vegetarian; }
+    public int getCalories() { return calories; }
+    public Type getType() { return type; }
+    
+    @Override
+    public String toString() { return name; }
+    public enum Type { MEAT, FISH, OTHER }
+}
+```
+
+</aside>
+
+## 4.2 스트림 시작하기
+
+- 스트림의 정의
+    - 데이터 처리 연산을 지원하도록 소스에서 추출된 연속된 요소(Sequence of delements)
+        - 연속된 요소
+            - 컬렉션과 같이 스트림은 특정 요소 형식으로 이루어진 연소된 값의 집합을 제공
+            - 컬렉션의 주제는 데이터, 스트림의 주제는 계산이다.
+                - 컬렉션은 요소 저장 및 접근 연산이 주를 이룬다.
+                - 스트림은 계산식이 주를 이룬다.
+        - 소스
+            - 컬렉션, 배열, 파일 등 다양한 소스에서 생성 가능하다.
+        - 데이터 처리 연산
+            - filter, map, reduce 같은 함수형 연산으로 데이터를 조작할 수 있다.
+- 스트림의 특징
+    - 파이프라이닝
+        - 스트림 연산끼리 연결해서 파이프라인을 구성할 수 있다.
+        - laziness, short circuiring
+    - 내부 반복
+        - 반복자를 이용해서 명시적으로 반복하는 컬렉션과 달리 스트림은 내부 반복을 지원한다.
+- 예제로 확인
+    
+    ```java
+    List<String> threeHighCaloricDishNames = 
+        menu.stream()
+            .filter(dish -> dish.getCalories() > 300)
+            .map(Dish::getName) 
+            .limit(3) 
+            .collect(toList());
+    System.out.println(threeHighCaloricDishNames);
+    ```
+    
+    - filter 메서드로 300 칼로리 이상의 dish 객체들만 걸러냄
+    - 걸러진 dish 객체들을 이름을 뽑아서 String으로 변환 → 요리명 추출
+    - 앞의 3가지만 선택
+    - 결과를 리스트로 저장
+
+> 요리 리스트를 포함하는 menu에 stream 메서드를 호출해서 스트림을 얻었다. 여기서 **데이터 소스**는 요리 리스트(메뉴)다. 데이터 소스는 **연속된 요소**를 스트림에 제공한다. 다음으로 스트림에 filter, map, limit, collect로 이어지는 일련의 **데이터 처리 연산**을 적용한다. collect를 제외한 모든 연산은 **파이프라인**을 형성할 수 있도록 스트림을 반환한다.
+>
