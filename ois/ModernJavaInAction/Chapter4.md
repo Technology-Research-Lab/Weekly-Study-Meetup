@@ -139,3 +139,32 @@ public class Dish { private final String name;
 > 요리 리스트를 포함하는 menu에 stream 메서드를 호출해서 스트림을 얻었다. 여기서 **데이터 소스**는 요리 리스트(메뉴)다. 데이터 소스는 **연속된 요소**를 스트림에 제공한다. 다음으로 스트림에 filter, map, limit, collect로 이어지는 일련의 **데이터 처리 연산**을 적용한다. collect를 제외한 모든 연산은 **파이프라인**을 형성할 수 있도록 스트림을 반환한다.
 >
 <img src="./images/image4-2.png" alt="image" width="700">
+
+## 4.3 스트림과 컬렉션
+
+- 컬렉션과 스트림 모두 연속된 요소 형식의 값을 저장하는 자료구조 인터페이스를 제공한다.
+- 연속된 → 순차적
+- 컬렉션과 스트림의 차이
+    - DVD vs. 인터넷 스트리밍
+    - 데이터 연산 타이밍
+        - 컬렉션의 모든 요소는 컬렉션에 추가하기 전에 계산되어야 한다?
+            - 컬렉션은 데이터를 메모리에 저장하고 데이터를 저장할 때 이미 어떤 값으로 생성? 할당? 처리가 되어 있어야 한다.
+            - supplier-driven
+            - 적극적 생성 → 모든 값을 계산할 때까지 대기
+        - 스트림은 요청할 때만 요소를 계산하는 고정된 자료구조다.
+            - 스트림에 요소를 추가하거나 제거할 수 없다.
+                - 파이프라인에서 요소를 추가하거나 제거하는 메서드 없음
+            - 사용자가 요청하는 값만 스트림에서 추출한다.
+            - laziness
+                - 요청이 있을 때만 계산
+
+### 4.3.1 딱 한 번만 탐색할 수 있다
+
+- 스트림은 한 번 탐색된 요소는 소비된다.
+    
+    ```java
+    List<String> title = Arrays.asList("Java8", "In", "Action");
+    Stream<String> s = title.stream();
+    s.forEach(System.out::println); // 이미 소비됨 스트림 닫힘
+    s.forEach(System.out::println); // IllegalStateException 발생
+    ```
