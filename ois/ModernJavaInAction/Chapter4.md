@@ -168,3 +168,50 @@ public class Dish { private final String name;
     s.forEach(System.out::println); // 이미 소비됨 스트림 닫힘
     s.forEach(System.out::println); // IllegalStateException 발생
     ```
+
+### 4.3.2 외부 반복과 내부 반복
+
+- 컬렉션은 요소를 사용자가 직접 반복, for 루프 → 외부 반복
+- 스트림은 어떤 작업을 할 것인지 정의할 뿐 요소를 어떻게 반복할지는 스트림 내부적으로 처리한다. → 내부 반복
+    
+    ```java
+    // for 루프를 이용하는 외부 반복
+    List<String> names = new ArrayList<>();
+    for (Dish dish : menu) {
+        names.add(dish.getName());
+    }
+    
+    // iterator를 이용하는 외부 반복
+    List<String> names = new ArrayList<>();
+    Iterator<String> iterator = menu.iterator();
+    while (iterator.hasNext()) {
+        Dish dish = iterator.next();
+        names.add(dish.getName());
+    }
+    
+    // 스트림 내부 반복
+    List<String> names = menu.stream()
+                             .map(Dish::getName) // 중간 연산 로직만 준비
+                             .collect(toList()); // 파이프라인 가동 -> 반복 실행
+    ```
+    
+- 내부 반복이 좋은 이유?
+    - 내부 반복은 외부 반복과 달리 반복 작업을 자동으로 처리해 병렬 실행과 최적화를 쉽게 지원하며, 개발자는 데이터 처리 로직에만 집중할 수 있어 효율적이고 간결한 코드를 작성할 수 있다.
+- 다른 예제
+    
+    ```java
+    // 외부 반복
+    List<String> highCaloricDishes = new ArrayList<>();
+    Iterator<String> iterator = menu.iterator();
+    while (iterator.hasNext()) {
+        Dish dish = iterator.next();
+        if (dish.getCalories() > 300) {
+            highCaloricDishes.add(dish.getName());
+        }
+    }
+    
+    // 내부 반복
+    List<String> highCaloricDish = menu.stream()
+                                       .filter(dish -> dish.getCalories() > 300)
+                                       .collect(toList());
+    ```
