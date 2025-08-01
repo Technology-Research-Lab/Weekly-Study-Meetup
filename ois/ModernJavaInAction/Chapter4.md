@@ -116,7 +116,7 @@ public class Dish {
 - 스트림의 특징
     - 파이프라이닝
         - 스트림 연산끼리 연결해서 파이프라인을 구성할 수 있다.
-        - laziness, short circuiring
+        - laziness, short circuiting
     - 내부 반복
         - 반복자를 이용해서 명시적으로 반복하는 컬렉션과 달리 스트림은 내부 반복을 지원한다.
 - 예제로 확인
