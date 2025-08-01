@@ -76,7 +76,8 @@ List<Dish> menu = Arrays.asList(
     new Dish("salmon", false, 450, Dish.Type.FISH)
 );
 
-public class Dish { private final String name;
+public class Dish {
+    private final String name;
     private final boolean vegetarian;
     private final int calories;
     private final Type type;
