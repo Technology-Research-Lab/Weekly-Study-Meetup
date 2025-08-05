@@ -10,8 +10,8 @@
             
             ```java
             List<Dish> vegetarianMenu = menu.stream()
-            																.filter(Dish::isVegetarian)
-            																.collect(toList());
+                                            .filter(Dish::isVegetarian)
+                                            .collect(toList());
             ```
             
             - Dish 객체의 isVegetarian 메서드(boolean 반환)를 참조하여 반환되는 true인 dish들만 걸러서 리스트로 반환한다.
@@ -23,7 +23,7 @@
     ```java
     List<Integer> numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4);
     numbers.stream()
-    			 .filter(i -> i % 2 == 0)
-    			 .distinct()
-    			 .forEach(System.out::println);
+           .filter(i -> i % 2 == 0)
+           .distinct()
+           .forEach(System.out::println);
     ```
