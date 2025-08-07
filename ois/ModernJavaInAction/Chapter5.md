@@ -75,3 +75,40 @@
                                 .skip(2)
                                 .collect(toList());
         ```
+
+## 5.3 매핑
+
+- 매핑이란?
+    - 원본 데이터를 원하는 형태로 재배열하거나 변환하는 과정
+        - 스트림 객체에서 특정 필드를 추출하는 것 → 선택
+        - 다른 타입 객체로 바꾸는 것
+
+### 5.3.1 스트림의 각 요소에 함수 적용하기
+
+- map 메서드
+    - 함수를 인수로 받는다.
+    - 스트림에 제공되는 각 요소에 함수가 적용된 새로운 요소로 매핑된다.
+        - 기존의 값을 고치는 게 아닌 변환에 가까운 매핑
+    - 예제
+        
+        ```java
+        List<String> dishNames = menu.stream()
+                                     .map(Dish::getName)
+                                     .collect(toList());
+        ```
+        
+        ```java
+        List<String> words = Arrays.asList("Modern", "Java", "In", "Action");
+        List<Integer> wordLengths = words.stream()
+                                         .map(String::length)
+                                         .collect(toList());
+        ```
+        
+        - "Modern", "Java", "In", "Action" 각 요소에 String::length를 적용해서 각 요소의 계산 결과를 매핑해서 리스트로 반환
+        
+        ```java
+        List<Integer> dishNameLengths = menu.stream()
+                                            .map(Dish::getName)
+                                            .map(String::length)
+                                            .collect(toList());
+        ```
