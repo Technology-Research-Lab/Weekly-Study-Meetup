@@ -42,7 +42,7 @@
         ```
         
 - dropWhile 메서드
-    - 스트림 앞에서부터 조건이 true인 요소는 무시하고, false가 반환 되는 지점부터 나머지 요소 포함
+    - 스트림 앞에서부터 조건이 true인 요소는 제외하고, false가 반환 되는 지점부터 나머지 요소 포함
         
         ```java
         List<Dish> slicedMenu2 = menu.stream()
