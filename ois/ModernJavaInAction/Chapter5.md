@@ -130,7 +130,7 @@
     
     - word 메서드는 String[] 배열을 반환
         
-        ![image.png](attachment:74106462-b076-4a36-9e9e-4940134414b3:image.png)
+        <img src="./images/image5-5.png" alt="image" width="700">
         
         ⇒ flatMap 메서드로 해결
         
@@ -163,7 +163,7 @@ List<String> uniqueCharacters =
 - flatMap 메서드
     - word.split(””)으로 만들어진 배열을 펼쳐서(flatten) 요소로 만든다.
         
-        ![image5-6.png](attachment:71a6d005-5a4c-4d7f-b9bf-22f7caca92d9:image5-6.png)
+        <img src="./images/image5-6.png" alt="image" width="700">
         
 
 # 5.4 검색과 매칭
