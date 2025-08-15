@@ -112,3 +112,163 @@
                                             .map(String::length)
                                             .collect(toList());
         ```
+
+## 5.3.2 스트림 평면화
+
+- String 리스트를 받아서 요소를 고유 문자로 이루어진 리스트 반환
+    - List<String>
+        - “Hello”, “World”
+    - 결과
+        - "H", "e", "l", "o", "W", "r", "d”
+    
+    ```java
+    words.stream()
+    		 .map(word -> word.split(""))
+    		 .distinct()
+    		 .collect(toList());
+    ```
+    
+    - word 메서드는 String[] 배열을 반환
+        
+        ![image.png](attachment:74106462-b076-4a36-9e9e-4940134414b3:image.png)
+        
+        ⇒ flatMap 메서드로 해결
+        
+
+### map과 Arrays.stream 활용
+
+- 배열 스트림 대신 문자열 스트림이 필요하다.
+    
+    ```java
+    words.stream()
+    		 .map(word -> word.split(""))
+    		 .map(Arrays::stream)
+    		 .distinct()
+    		 .collect(toList());
+    ```
+    
+    - List<Stream<String>> 반환
+
+### flatMap 사용
+
+```java
+List<String> uniqueCharacters = 
+		words.stream()
+				 .map(word -> word.split(""))
+				 .flatMap(Arrays::stream)
+				 .distinct()
+				 .collect(toList());
+```
+
+- flatMap 메서드
+    - word.split(””)으로 만들어진 배열을 펼쳐서(flatten) 요소로 만든다.
+        
+        ![image5-6.png](attachment:71a6d005-5a4c-4d7f-b9bf-22f7caca92d9:image5-6.png)
+        
+
+# 5.4 검색과 매칭
+
+## 5.4.1 프레디케이트가 적어도 한 요소와 일치하는지 확인
+
+- anyMatch 메서드
+    
+    ```java
+    if (menu.stream().anyMatch(Dish::isVegetarian)) {
+    		System.out.println("채식 메뉴")
+    } 
+    ```
+    
+    - boolean 반환, 최종 연산자
+
+## 5.4.2 프레디케이트가 모든 요소와 일치하는지 검사
+
+- allMatch 메서드
+    - 한 요소(anyMatch)가 아닌, 모든 요소가 프레디케이트와 일치하는지 검사
+        
+        ```java
+        boolean isHealthy = menu.stream()
+        												.allMatch(dish -> dish.getCalories() < 1000);
+        ```
+        
+        - 모든 요소가 조건에 맞아야만 true 반환
+
+### NONEMATCH
+
+- allMatch와 반대 연산 수행
+    
+    ```java
+    boolean isHealthy = menu.stream()
+    												.noneMatch(d -> d.getCalories() >= 1000);
+    ```
+    
+- anyMatch, allMatch, noneMatch는 스트림 쇼트서킷 기법 즉, 자바의 &&(and), ||(or)와 같은  연산을 활용한다.
+    
+    > 쇼트서킷. short-circuit
+    전기 회로에서 잘못된 연결로 전류가 원래 경로보다 짧은 경로로 흘러 전체 회로를 다 통과하지 않고 흐르는 현상
+    &&는 왼쪽 조건이 false면, 오른쪽 조건 skip
+    ||는 왼쪽 조건이 true면, 오른쪽 조건 skip
+    allMatch, noneMatch, findFirst, findAny 등의 연산은 모든 스트림의 요소를 처리하지 않고도 결과를 반환할 수 있다.
+    > 
+
+## 5.4.3 요소 검색
+
+- findAny 메서드
+    
+    ```java
+    Optional<Dish> dish = menu.stream()
+    													.filter(Dish::isVegetarian)
+    													.findAny();
+    ```
+    
+    - 채식 요리를 filter로 거른 요소들만 match
+    - Optaionl 타입 반환
+
+### Optional이란?
+
+- 값이 존재하면 반환, 존재하지 않으면 예외 발생하는 컨테이너 클래스
+- finaAny 메서드는 null을 반환할 수 있다.
+    - null은 에러를 쉽게 일으킨다.
+    - Optional로 값이 없을 때 어떻게 처리할지 강제하여 에러 방지
+- 갖고 있는 메서드
+    - ifPresent()
+        - 값이 있으면 true, 없으면 false
+    - ifPresent(Consumer<T> block)
+        - 값이 있으면 Consumer block 실행
+    - T get()
+        - 값이 있으면 값 반환, 없으면 NoSuchElementException 발생
+    - T orElse(T other)
+        - 값이 있으면 값 반환, 없으면 기본값 반환
+    
+    ```java
+    munu.stream()
+    		.filter(Dish::isVegetarian)
+    		.findAny()
+    		.ifPresent(dish -> System.out.println(dish.getName());
+    ```
+    
+    ⇒ 값이 있으면 출력, 없으면 아무 일도 일어나지 않는다.
+    
+
+## 5.4.4 첫 번째 요소 찾기
+
+```java
+List<Integer> someNumbers = Arrays.asList(1, 2, 3, 4, 5);
+Optional<Integer> firstSquareDivisibleByThree 
+		= someNumbers.stream()
+								 .map(n -> n * n)
+								 .filter(n -> n % 3 == 0)
+								 .findFirst();
+```
+
+⇒ 9 반환
+
+> findFirst, findAny는 왜 모두 필요할까?
+⇒ 병렬 실행에서 첫 번째 요소를 찾기 어렵다. 반환 순서가 상관없다면 제약이 적은 findAny를 사용한다.
+> 
+- 스트림에서 첫 번째 요소를 찾기 어려운 이유
+    - 순서가 보장된 스트림과 그렇지 않은 스트림
+        - 스트림은 List 같이 순서가 있는 컬렉션으로 만들 수도 있고, Set, HashMap 같이 순서가 없는 컬렉션으로 만들 수 도 있다.
+    - 병렬 스트림에서의 어려움
+        - 병렬 스트림은 데이터를 여러 스레드에 분할해서 동시에 처리한다.
+        - 별도의 데이터를 chunk 처리 하므로 어떤 스레드가 먼저 결과를 갖고 올 지 모른다.
+        - 그래서 첫 번째 요소를 찾기 보다는 임의의 하나의 요소(findAany)를 찾는 게 제약이 적다.
