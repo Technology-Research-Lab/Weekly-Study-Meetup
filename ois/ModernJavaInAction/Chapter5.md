@@ -123,9 +123,9 @@
     
     ```java
     words.stream()
-    		 .map(word -> word.split(""))
-    		 .distinct()
-    		 .collect(toList());
+		 .map(word -> word.split(""))
+		 .distinct()
+		 .collect(toList());
     ```
     
     - word 메서드는 String[] 배열을 반환
@@ -141,10 +141,10 @@
     
     ```java
     words.stream()
-    		 .map(word -> word.split(""))
-    		 .map(Arrays::stream)
-    		 .distinct()
-    		 .collect(toList());
+		 .map(word -> word.split(""))
+		 .map(Arrays::stream)
+		 .distinct()
+		 .collect(toList());
     ```
     
     - List<Stream<String>> 반환
@@ -154,10 +154,10 @@
 ```java
 List<String> uniqueCharacters = 
 		words.stream()
-				 .map(word -> word.split(""))
-				 .flatMap(Arrays::stream)
-				 .distinct()
-				 .collect(toList());
+			 .map(word -> word.split(""))
+			 .flatMap(Arrays::stream)
+			 .distinct()
+			 .collect(toList());
 ```
 
 - flatMap 메서드
@@ -174,7 +174,7 @@ List<String> uniqueCharacters =
     
     ```java
     if (menu.stream().anyMatch(Dish::isVegetarian)) {
-    		System.out.println("채식 메뉴")
+		System.out.println("채식 메뉴")
     } 
     ```
     
@@ -187,7 +187,7 @@ List<String> uniqueCharacters =
         
         ```java
         boolean isHealthy = menu.stream()
-        												.allMatch(dish -> dish.getCalories() < 1000);
+								.allMatch(dish -> dish.getCalories() < 1000);
         ```
         
         - 모든 요소가 조건에 맞아야만 true 반환
@@ -198,7 +198,7 @@ List<String> uniqueCharacters =
     
     ```java
     boolean isHealthy = menu.stream()
-    												.noneMatch(d -> d.getCalories() >= 1000);
+							.noneMatch(d -> d.getCalories() >= 1000);
     ```
     
 - anyMatch, allMatch, noneMatch는 스트림 쇼트서킷 기법 즉, 자바의 &&(and), ||(or)와 같은  연산을 활용한다.
@@ -216,8 +216,8 @@ List<String> uniqueCharacters =
     
     ```java
     Optional<Dish> dish = menu.stream()
-    													.filter(Dish::isVegetarian)
-    													.findAny();
+							  .filter(Dish::isVegetarian)
+							  .findAny();
     ```
     
     - 채식 요리를 filter로 거른 요소들만 match
@@ -241,9 +241,9 @@ List<String> uniqueCharacters =
     
     ```java
     munu.stream()
-    		.filter(Dish::isVegetarian)
-    		.findAny()
-    		.ifPresent(dish -> System.out.println(dish.getName());
+		.filter(Dish::isVegetarian)
+		.findAny()
+		.ifPresent(dish -> System.out.println(dish.getName());
     ```
     
     ⇒ 값이 있으면 출력, 없으면 아무 일도 일어나지 않는다.
@@ -254,10 +254,10 @@ List<String> uniqueCharacters =
 ```java
 List<Integer> someNumbers = Arrays.asList(1, 2, 3, 4, 5);
 Optional<Integer> firstSquareDivisibleByThree 
-		= someNumbers.stream()
-								 .map(n -> n * n)
-								 .filter(n -> n % 3 == 0)
-								 .findFirst();
+	= someNumbers.stream()
+				 .map(n -> n * n)
+				 .filter(n -> n % 3 == 0)
+				 .findFirst();
 ```
 
 ⇒ 9 반환
