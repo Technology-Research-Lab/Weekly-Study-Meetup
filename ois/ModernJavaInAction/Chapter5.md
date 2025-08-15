@@ -1,8 +1,8 @@
-# Chapter 5. 스트림 활용
+# 스트림 활용
 
 ## 5.1 필터링
 
-#### 5.1.1 프레디케이트로 필터링
+### 5.1.1 프레디케이트로 필터링
 
 - filter 메서드
     - predicate를 인수로 받아서 일치하는 요소 반환
@@ -113,7 +113,7 @@
                                             .collect(toList());
         ```
 
-## 5.3.2 스트림 평면화
+### 5.3.2 스트림 평면화
 
 - String 리스트를 받아서 요소를 고유 문자로 이루어진 리스트 반환
     - List<String>
@@ -166,9 +166,9 @@ List<String> uniqueCharacters =
         <img src="./images/image5-6.png" alt="image" width="700">
         
 
-# 5.4 검색과 매칭
+## 5.4 검색과 매칭
 
-## 5.4.1 프레디케이트가 적어도 한 요소와 일치하는지 확인
+### 5.4.1 프레디케이트가 적어도 한 요소와 일치하는지 확인
 
 - anyMatch 메서드
     
@@ -180,7 +180,7 @@ List<String> uniqueCharacters =
     
     - boolean 반환, 최종 연산자
 
-## 5.4.2 프레디케이트가 모든 요소와 일치하는지 검사
+### 5.4.2 프레디케이트가 모든 요소와 일치하는지 검사
 
 - allMatch 메서드
     - 한 요소(anyMatch)가 아닌, 모든 요소가 프레디케이트와 일치하는지 검사
@@ -210,7 +210,7 @@ List<String> uniqueCharacters =
     allMatch, noneMatch, findFirst, findAny 등의 연산은 모든 스트림의 요소를 처리하지 않고도 결과를 반환할 수 있다.
     > 
 
-## 5.4.3 요소 검색
+### 5.4.3 요소 검색
 
 - findAny 메서드
     
@@ -249,7 +249,7 @@ List<String> uniqueCharacters =
     ⇒ 값이 있으면 출력, 없으면 아무 일도 일어나지 않는다.
     
 
-## 5.4.4 첫 번째 요소 찾기
+### 5.4.4 첫 번째 요소 찾기
 
 ```java
 List<Integer> someNumbers = Arrays.asList(1, 2, 3, 4, 5);
