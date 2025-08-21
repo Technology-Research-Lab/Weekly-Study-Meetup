@@ -23,7 +23,7 @@
     - 테이블 간 관계 설정
 - 예제
     
-    ![image.png](attachment:c154bac9-628c-400e-a695-3bf8d463c749:image.png)
+    <img src="./images/tables.png" alt="image" width="700">
     
     - manufacturer - equipment → OneToMany
     - equipment - equipment_item → OneToMany
